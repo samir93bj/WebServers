@@ -1,30 +1,24 @@
-const http = require('http');
-const { Http2ServerRequest } = require('http2');
-const { listenerCount } = require('process');
+const express = require('express')
+const app = express();
+const port = 8080;
 
-http.createServer((req, res) => {
+//Middleware
+// Servir contenido estatico
+app.use(express.static('public'));
 
-    /* res.writeHead(200, {'Content-Type': 'application/json'});
+app.get('/',  (req, res) => {
+  res.send('Home Page')
+});
 
-    persona = {
-        id:1,
-        nombre : 'Samir'
-    }
+app.get('/hola-mundo',  (req, res) => {
+    res.send('Hola mundo en su respectiva ruta');
+  });
 
-    res.write(JSON.stringify(persona));*/
+app.get('*',  (req, res) => {
+    res.sendFile(__dirname + '/public/404.html');
+  });
 
 
-    res.setHeader('content-disposition', 'attachment; filename="lista.csv"');
-    res.writeHead(200, {'Content-Type': 'application/csv'});
-
-    res.write('id, nombre \n');
-    res.write('1, Fernando \n');
-    res.write('2, Carlos \n');
-    res.write('3, Samir   \n');
-    res.write('4, Flor \n');
-    
-    res.end;
-})
-.listen(8080);
-
-console.log('Escuchando en el puerto', 8080);
+app.listen(port,() => {
+    console.log(`Example app listening on port: ${port}`);
+});
