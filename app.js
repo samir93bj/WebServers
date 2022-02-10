@@ -2,19 +2,18 @@ const express = require('express')
 const app = express();
 const port = 8080;
 
+//
+app.set('view engine', 'hbs');
+
 //Middleware
 // Servir contenido estatico
 app.use(express.static('public'));
 
-/*
-app.get('/',  (req, res) => {
-  res.send('Home Page')
-});
 
-app.get('/hola-mundo',  (req, res) => {
-    res.send('Hola mundo en su respectiva ruta');
-  });
-*/
+//De esta manera podemos renderizar la view del index
+app.get('/',  (req, res) => {
+  res.render('home');
+});
 
 app.get('/generic',  (req, res) => {
   res.sendFile(__dirname + '/public/generic.html');
