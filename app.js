@@ -12,7 +12,7 @@ hbs.registerPartials(__dirname + '/views/partials'); //hbs
 // Servir contenido estatico
 app.use(express.static('public'));
 
-
+/*
 //De esta manera podemos renderizar la view del index
 app.get('/',  (req, res) => {
   res.render('home', {
@@ -33,13 +33,13 @@ app.get('/elements',  (req, res) => {
     nombre : 'Samir Mahmud',
     titulo: 'Curso de Node JS'
   });
-});
+});*/
 
 app.get('*',  (req, res) => {
-    res.sendFile(__dirname + '/public/404.html');
+    res.sendFile(__dirname + '/public/index.html');
   });
 
 
 app.listen(port,() => {
-    console.log(`Example app listening on port: ${process.env.PORT}`);
+    console.log(`Example app listening at: https://localhost:${process.env.PORT}`);
 });
